@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- Spawn simulation world based on environment variable, SIMULATION_WORLD.-->
+  <!-- Test node-->
+  
+
+ <include file="$(find cloudwatch_simulation)/launch/$(env SIMULATION_WORLD)_turtlebot_navigation.launch">
+ </include>
+
+
+</launch>

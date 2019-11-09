@@ -8,7 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package()
 
-install(DIRECTORY launch worlds
+install(DIRECTORY launch routes worlds
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
