@@ -62,7 +62,7 @@
 				"s3Prefix": "simulation_job_output"
 			},
 			"robotApplications": [{
-				"application": "arn:aws:robomaker:us-west-2:461812446130:robot-application/RobotApplication-ITjQV3KeAMI5/1576705607132",
+				"application": "arn:aws:robomaker:us-west-2:461812446130:robot-application/RobotApplication-dafNLAfgFVqa/1578670254551",
 				"applicationVersion": "$LATEST",
 				"launchConfig": {
 					"launchFile": "await_commands.launch",
@@ -70,7 +70,7 @@
 				}
 			}],
 			"simulationApplications": [{
-				"application": "arn:aws:robomaker:us-west-2:461812446130:simulation-application/SimulationApplication-S0dRfOkVs6t1/1576705606588",
+				"application": "arn:aws:robomaker:us-west-2:461812446130:simulation-application/SimulationApplication-YG95TofZ6TJM/1578670253883",
 				"applicationVersion": "$LATEST",
 				"launchConfig": {
                     "packageName": "cloudwatch_simulation",
