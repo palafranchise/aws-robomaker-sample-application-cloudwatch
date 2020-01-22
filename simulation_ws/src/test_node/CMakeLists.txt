@@ -48,7 +48,7 @@ include_directories(
 # Install
 ################################################################################
 catkin_install_python(PROGRAMS 
-  nodes/run_test
+  nodes/navigation_test
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
