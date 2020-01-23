@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import rospy
+import rostest
 import time
 import os
+import unittest
 
 from rosgraph_msgs.msg import Clock
 from ros_monitoring_msgs.msg import MetricList
@@ -13,7 +15,7 @@ class SimulationUtils():
     """
     This class provides methods to interact with the robomaker simulation service. You can cancel jobs and tag jobs.
     """
-    def cancel_job():
+    def cancel_job(self):
         rospy.wait_for_service('/robomaker/job/cancel')
         requestCancel = rospy.ServiceProxy('/robomaker/job/cancel', Cancel)
         response = requestCancel()
@@ -23,7 +25,7 @@ class SimulationUtils():
         else:
             rospy.logerr("Cancel request failed: %s", response.message)
 
-    def set_tag(name, value):
+    def set_tag(self, name, value):
         rospy.wait_for_service('/robomaker/job/add_tags')
         requestAddTags = rospy.ServiceProxy('/robomaker/job/add_tags', AddTags)
         tags = ([Tag(key=name, value=value)])
@@ -34,9 +36,9 @@ class SimulationUtils():
             rospy.logerr("Add tags request failed for tags (%s): %s", tags, response.message)
 
 class NavigationTest(unittest.TestCase):
-"""
-This test case sends 1 or more navigation goals and checks to see if the turtlebot successfully reaches it’s destination(s).
-"""
+    """
+    This test case sends 1 or more navigation goals and checks to see if the turtlebot successfully reaches it’s destination(s).
+    """
     def setUp(self):
         ts = time.time()
         self.test_name = "Robot_Monitoring_Tests_" + str(ts).split(".", 1)[0]
@@ -47,7 +49,7 @@ This test case sends 1 or more navigation goals and checks to see if the turtleb
         self.successful_navigations = 0
 
         if rospy.has_param('NAVIGATION_SUCCESS_COUNT'):
-            self.navigation_success_count = rospy.get_param(NAVIGATION_SUCCESS_COUNT)
+            self.navigation_success_count = rospy.get_param('NAVIGATION_SUCCESS_COUNT')
         else:
             self.navigation_success_count = 1
 
@@ -70,7 +72,7 @@ This test case sends 1 or more navigation goals and checks to see if the turtleb
                     
     def test_navigation(self):
     	try:
-    		self.set_tag(name=test_name + "_Time_Elapsed_Start", value= str(time.time()).split(".", 1)[0])
+    		self.utils.set_tag(name=self.test_name + "_Time_Elapsed_Start", value= str(time.time()).split(".", 1)[0])
     		clock = rospy.Subscriber('/metrics', MetricList, self.check_complete)
     	except:
             self.utils.set_tag(name=self.test_name + "_Time_Elapsed_Status", value="Failed")
@@ -85,6 +87,6 @@ class NavigationTestSuite(unittest.TestSuite):
         self.addTest(NavigationTest())
 
 if __name__ == "__main__":
-    rospy.init_node('navigation_test’)
-    rostest.rosrun(PKG, 'navigation_test', NavigationTestSuite)
+    rospy.init_node('navigation_test')
+    rostest.rosrun('test_node', 'navigation_test', NavigationTestSuite)
     rospy.spin()

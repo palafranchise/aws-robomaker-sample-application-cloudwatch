@@ -33,6 +33,6 @@
   </group>
   
   <!-- Test node-->
-  <node pkg="test_node" type="run_test" name="run_test" output="screen" required="true"/>
+  <node pkg="test_node" type="navigation_test" name="navigation_test" output="screen" required="true"/>
   
 </launch>
