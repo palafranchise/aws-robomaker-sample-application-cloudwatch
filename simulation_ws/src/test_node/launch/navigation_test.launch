@@ -12,5 +12,5 @@
   <param name="use_sim_time" value="$(arg use_sim_time)"/>
 
   <!-- Rotate the robot on launch -->
-  <node pkg="test_node" type="navigaton_test" name="navigaton_test" output="screen"/>
+  <node pkg="test_node" type="navigation_test" name="navigation_test" output="screen"/>
 </launch>
